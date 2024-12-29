@@ -2,11 +2,7 @@ const button = document.querySelector('.button-add-task')
 const input = document.querySelector('.input-task')
 const listaCompleta = document.querySelector('.list-tasks')
 
-
-
 let minhaListaDeItens = []
-
-
 
 function addNewTask() {
     minhaListaDeItens.push({
@@ -14,7 +10,7 @@ function addNewTask() {
         concluida: false
     })
 
-    input.value=''
+    input.value = ''
 
     mostrarTarefas()
 }
@@ -22,7 +18,7 @@ function addNewTask() {
 function mostrarTarefas() {
     let novaLi = ''
 
-    minhaListaDeItens.forEach((item, index)=> {
+    minhaListaDeItens.forEach((item, index) => {
 
         novaLi = novaLi + `
         <li class="task ${item.concluida && 'done'}">
@@ -39,27 +35,26 @@ function mostrarTarefas() {
 localStorage.setItem('lista', JSON.stringify(minhaListaDeItens))
 
 function concluirTarefa(index) {
-    minhaListaDeItens [index].concluida = !minhaListaDeItens [index].concluida
+    minhaListaDeItens[index].concluida = !minhaListaDeItens[index].concluida
 
     mostrarTarefas()
 }
 
-function deletarItem(index){
+function deletarItem(index) {
     minhaListaDeItens.splice(index, 1)
     mostrarTarefas()
-    
+
 }
 
 function recarregarTarefas() {
     const tarefasDoLocalStorage = localStorage.getItem('lista')
 
-    if(tarefasDoLocalStorage){
+    if (tarefasDoLocalStorage) {
         minhaListaDeItens = JSON.parse(tarefasDoLocalStorage)
 
     }
     mostrarTarefas()
 }
-
 
 recarregarTarefas()
 button.addEventListener('click', addNewTask)
